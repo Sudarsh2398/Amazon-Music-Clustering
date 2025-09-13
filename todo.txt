@@ -1,0 +1,79 @@
+📌 Project Requirement (Amazon Music Clustering)
+🎯 Goal
+
+Group similar songs together based only on audio features (not using genres directly).
+👉 Later, compare the clusters with actual genres to check if clusters align with real genres/moods.
+
+🔑 Steps You Must Do
+
+Data Exploration & Cleaning
+
+Load dataset, remove duplicates/missing values.
+
+Drop useless columns (id_songs, id_artists, name_song, etc.).
+
+Keep only useful audio features.
+
+Feature Selection
+Required audio features:
+
+danceability, energy, loudness, speechiness, acousticness,
+instrumentalness, liveness, valence, tempo, duration_ms.
+
+Optionally add explicit, followers, popularity_artists, release_year.
+
+Data Normalization
+
+Scale all features using StandardScaler or MinMaxScaler.
+
+Clustering is distance-based, so scaling is very important.
+
+Clustering (Unsupervised Learning)
+
+Use K-Means first.
+
+Find the best number of clusters k using:
+
+Elbow Method (SSE vs. k).
+
+Silhouette Score (how well songs are grouped).
+
+Optional: Try DBSCAN or Hierarchical Clustering.
+
+Cluster Evaluation & Interpretation
+
+Check cluster profiles → mean values of each feature per cluster.
+
+Compare clusters with actual genres column to see patterns.
+(e.g., Cluster 0 = mostly “pop”, Cluster 1 = mostly “jazz”).
+
+Visualization
+
+PCA/t-SNE → 2D scatter plot with clusters.
+
+Bar plots / heatmaps → average feature values per cluster.
+
+Final Deliverables
+
+Add cluster_label column back to dataset.
+
+Export final dataset with clusters to CSV.
+
+Write report explaining:
+
+What each cluster means (e.g., Party Songs, Chill Acoustic, Sad Songs).
+
+How clusters align with genres.
+
+(Bonus) Streamlit app to visualize clusters/playlists.
+
+📊 Business Use Case
+
+Personalized playlist generation.
+
+Song/artist similarity discovery.
+
+Market segmentation for streaming platforms.
+
+✅ So basically: you are not predicting popularity or genre directly.
+👉 You are creating clusters from features, and then checking if those clusters look like genres/moods.
