@@ -6,6 +6,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import json
 import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # -------------------------------------------------------
 # Helper: Load Lottie Animations (with error handling)
@@ -19,16 +20,22 @@ def load_lottie_local(filepath: str):
         return None
 
 # Load animations from local files
-music_anim = load_lottie_local(r"D:\Guvi projects\AmazonMusicClustering\lotties\music-group.json")
-beat_loader = load_lottie_local(r"D:\Guvi projects\AmazonMusicClustering\lotties\player music.json")
-particles_anim = load_lottie_local(r"D:\Guvi projects\AmazonMusicClustering\lotties\pulsing neon heart.json")
+
+# music_anim = load_lottie_local(r"D:\Guvi projects\AmazonMusicClustering\lotties\music-group.json")
+# beat_loader = load_lottie_local(r"D:\Guvi projects\AmazonMusicClustering\lotties\player music.json")
+# particles_anim = load_lottie_local(r"D:\Guvi projects\AmazonMusicClustering\lotties\pulsing neon heart.json")
+music_anim = load_lottie_local(os.path.join(BASE_DIR, "lotties", "music-group.json"))
+beat_loader = load_lottie_local(os.path.join(BASE_DIR, "lotties", "player music.json"))
+particles_anim = load_lottie_local(os.path.join(BASE_DIR, "lotties", "pulsing neon heart.json"))
+
 
 # -------------------------------------------------------
 # Load Data
 # -------------------------------------------------------
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 file_path = os.path.join(BASE_DIR, "Datasets", "clusterd_amazon_music.csv")
 features_path = os.path.join(BASE_DIR, "Datasets", "features.csv")
+final_path = os.path.join(BASE_DIR, "Datasets", "pca_clusters.csv")
 try:
     # df = pd.read_csv(r"D:\Guvi projects\AmazonMusicClustering\Datasets\clusterd_amazon_music.csv")
     df = pd.read_csv(file_path)
@@ -229,7 +236,7 @@ with tab1:
     st.header("📊 Clustered Universe of Music")
 
     try:
-        finaldf = pd.read_csv(r"D:\Guvi projects\AmazonMusicClustering\Datasets\pca_clusters.csv")
+        finaldf = pd.read_csv(final_path)
 
         fig, ax = plt.subplots(figsize=(10,7))
         sns.scatterplot(data=finaldf, x="PC1", y="PC2", hue="Clusters", palette="husl", s=60, ax=ax)
