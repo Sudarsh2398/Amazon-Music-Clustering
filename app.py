@@ -5,6 +5,7 @@ from streamlit_lottie import st_lottie
 import seaborn as sns
 import matplotlib.pyplot as plt
 import json
+import os
 
 # -------------------------------------------------------
 # Helper: Load Lottie Animations (with error handling)
@@ -25,9 +26,13 @@ particles_anim = load_lottie_local(r"D:\Guvi projects\AmazonMusicClustering\lott
 # -------------------------------------------------------
 # Load Data
 # -------------------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(BASE_DIR, "Datasets", "clusterd_amazon_music.csv")
+features_path = os.path.join(BASE_DIR, "Datasets", "features.csv")
 try:
-    df = pd.read_csv(r"D:\Guvi projects\AmazonMusicClustering\Datasets\clusterd_amazon_music.csv")
-    req_df = pd.read_csv(r"D:\Guvi projects\AmazonMusicClustering\Datasets\features.csv")
+    # df = pd.read_csv(r"D:\Guvi projects\AmazonMusicClustering\Datasets\clusterd_amazon_music.csv")
+    df = pd.read_csv(file_path)
+    req_df = pd.read_csv(features_path)
 except FileNotFoundError as e:
     st.error(f"⚠️ Dataset not found: {e}")
     st.stop()
